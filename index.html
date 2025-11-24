@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ananya Shrimali · Building Performance & Computational Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #000000;
+            --secondary: #666666;
+            --accent: #999999;
+            --light-bg: #FAFAFA;
+            --white: #FFFFFF;
+            --border: #E5E5E5;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            font-size: 13px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--primary);
+            background: var(--white);
+            letter-spacing: -0.01em;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--primary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 11px;
+            font-weight: 300;
+            transition: color 0.2s;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .hero {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 8rem 3rem 6rem;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 200;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            line-height: 1.1;
+        }
+        
+        .hero .subtitle {
+            font-size: 15px;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            color: var(--secondary);
+            letter-spacing: 0.01em;
+        }
+        
+        .hero .description {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--secondary);
+            max-width: 650px;
+            letter-spacing: 0.01em;
+        }
+        
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .metric {
+            text-align: left;
+        }
+        
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        
+        .metric-label {
+            font-size: 10px;
+            font-weight: 300;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .skills {
+            padding: 3rem 3rem;
+            background: var(--light-bg);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .skills-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .skill-badge {
+            background: var(--white);
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            font-size: 10px;
+            font-weight: 300;
+            color: var(--secondary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        
+        section {
+            padding: 5rem 3rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 10px;
+            color: var(--secondary);
+            margin-bottom: 4rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+        
+        .project-card {
+            background: var(--white);
+            padding: 3rem;
+            transition: background 0.2s, transform 0.2s;
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            background: var(--light-bg);
+            transform: translateY(-2px);
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .project-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+        }
+        
+        .project-year {
+            font-size: 10px;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+        }
+        
+        .project-title {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+        }
+        
+        .project-meta {
+            color: var(--secondary);
+            font-size: 11px;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.01em;
+        }
+        
+        .project-description {
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 13px;
+            font-weight: 300;
+        }
+        
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 22px;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        
+        .stat-label {
+            font-size: 9px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 0.3rem 0.8rem;
+            font-size: 9px;
+            color: var(--secondary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+        
+        .contact {
+            background: var(--light-bg);
+            border-top: 1px solid var(--border);
+            padding: 5rem 3rem;
+        }
+        
+        .contact .container {
+            text-align: center;
+            max-width: 700px;
+        }
+        
+        .contact p {
+            font-size: 13px;
+            color: var(--secondary);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+        
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .contact-btn {
+            background: transparent;
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            font-weight: 300;
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+        
+        .contact-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+        
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 3rem;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 4rem;
+            max-width: 900px;
+            width: 100%;
+            margin-top: 3rem;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--secondary);
+            background: none;
+            border: none;
+            font-weight: 200;
+            transition: color 0.2s;
+        }
+        
+        .modal-close:hover {
+            color: var(--primary);
+        }
+        
+        .modal-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .modal-section {
+            margin-bottom: 3rem;
+        }
+        
+        .modal-section h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        
+        .modal-section p {
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--secondary);
+            font-weight: 300;
+        }
+        
+        .modal-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .modal-section li {
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--secondary);
+            font-weight: 300;
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-section li:before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        
+        .highlight-box {
+            background: var(--light-bg);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .hero {
+                padding: 5rem 1.5rem 4rem;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            section {
+                padding: 3rem 1.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-card {
+                padding: 2rem;
+            }
+            
+            .modal {
+                padding: 1rem;
+            }
+            
+            .modal-content {
+                padding: 2rem 1.5rem;
+                margin-top: 1rem;
+            }
+            
+            .project-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Ananya Shrimali</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="about">
+        <div class="hero-content">
+            <h1>Ananya Shrimali</h1>
+            <p class="subtitle">Building Performance · Computational Design · Energy Modeling</p>
+            <p class="description">
+                <a href="https://www.cmu.edu" target="_blank" style="color: var(--primary); text-decoration: underline; text-decoration-color: var(--border);">Carnegie Mellon University</a> Architecture graduate specializing in data-driven sustainable design. 
+                Experienced in parametric modeling, energy simulation, and adaptive reuse strategies 
+                with focus on integrating building performance analysis into early-stage design decisions.
+                <br><br>
+                <a href="#resume" onclick="window.open('https://drive.google.com/file/d/1BqCEEF8ljxbLj-432oF0XXdy8G85-0OQ/view?usp=drive_link', '_blank'); return false;" style="color: var(--primary); text-decoration: underline; text-decoration-color: var(--border); font-weight: 400;">View Resume →</a>
+            </p>
+            
+            <div class="hero-metrics">
+                <div class="metric">
+                    <div class="metric-value">45%</div>
+                    <div class="metric-label">Energy Reduction</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">157</div>
+                    <div class="metric-label">kWh/m² Site EUI</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">6</div>
+                    <div class="metric-label">Featured Projects</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">398k</div>
+                    <div class="metric-label">kWh Solar/Year</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills">
+        <div class="skills-container">
+            <span class="skill-badge">Climate Studio</span>
+            <span class="skill-badge">Rhino</span>
+            <span class="skill-badge">Grasshopper</span>
+            <span class="skill-badge">Python</span>
+            <span class="skill-badge">Energy Modeling</span>
+            <span class="skill-badge">HVAC Design</span>
+            <span class="skill-badge">Daylighting Analysis</span>
+            <span class="skill-badge">GIS</span>
+            <span class="skill-badge">Parametric Design</span>
+            <span class="skill-badge">Load Calculations</span>
+            <span class="skill-badge">Building Systems</span>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Selected Work</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card" onclick="openModal('ashrae')">
+                    <div class="project-header">
+                        <span class="project-number">01</span>
+                        <span class="project-year">2024</span>
+                    </div>
+                    <h3 class="project-title">ASHRAE Library Design Competition</h3>
+                    <p class="project-meta">São Paulo, Brazil · Climate Zone 2A · 3-Story Public Library</p>
+                    <p class="project-description">
+                        Comprehensive HVAC system design integrating VRF-DOAS with renewable energy, 
+                        achieving significant energy reduction through facade optimization and smart zoning strategies.
+                    </p>
+                    
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">45%</div>
+                            <div class="stat-label">Energy Saved</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">157</div>
+                            <div class="stat-label">kWh/m² EUI</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">101</div>
+                            <div class="stat-label">kgCO₂/m²</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-tags">
+                        <span class="tag">VRF-DOAS</span>
+                        <span class="tag">Energy Analysis</span>
+                        <span class="tag">Climate Studio</span>
+                        <span class="tag">Facade Optimization</span>
+                        <span class="tag">Solar PV</span>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="openModal('hvac')">
+                    <div class="project-header">
+                        <span class="project-number">02</span>
+                        <span class="project-year">2024</span>
+                    </div>
+                    <h3 class="project-title">Small Office HVAC Analysis</h3>
+                    <p class="project-meta">San Francisco, CA · Coworking Office · System Comparison Study</p>
+                    <p class="project-description">
+                        Comparative HVAC system analysis with detailed load calculations and ERV sizing. 
+                        Evaluated four system types, recommending mini-split VRF for optimal performance.
+                    </p>
+                    
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">33%</div>
+                            <div class="stat-label">Energy Saved</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">54</div>
+                            <div class="stat-label">kBTU/ft² EUI</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">770</div>
+                            <div class="stat-label">CFM Fresh Air</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-tags">
+                        <span class="tag">System Selection</span>
+                        <span class="tag">Load Calculations</span>
+                        <span class="tag">ERV Sizing</span>
+                        <span class="tag">Energy Modeling</span>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="openModal('thesis')">
+                    <div class="project-header">
+                        <span class="project-number">03</span>
+                        <span class="project-year">2025</span>
+                    </div>
+                    <h3 class="project-title">Adaptive Reuse Thesis</h3>
+                    <p class="project-meta">Pittsburgh, PA · Office-to-Residential Conversion Research</p>
+                    <p class="project-description">
+                        Parametric analysis of 1965-1985 office buildings for residential conversion potential. 
+                        Computational workflow evaluating daylighting performance across building iterations.
+                    </p>
+                    
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">50+</div>
+                            <div class="stat-label">Iterations</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Python</div>
+                            <div class="stat-label">Automation</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">sDA</div>
+                            <div class="stat-label">Metric</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-tags">
+                        <span class="tag">Parametric Modeling</span>
+                        <span class="tag">Daylighting</span>
+                        <span class="tag">RhinoPython</span>
+                        <span class="tag">Adaptive Reuse</span>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="openModal('bpm')">
+                    <div class="project-header">
+                        <span class="project-number">04</span>
+                        <span class="project-year">2025</span>
+                    </div>
+                    <h3 class="project-title">Building Performance Modeling</h3>
+                    <p class="project-meta">Academic Projects · Various Scales & Typologies</p>
+                    <p class="project-description">
+                        Series of energy modeling assignments exploring thermal analysis, passive strategies, 
+                        and system optimization through simulation-based design workflows.
+                    </p>
+                    
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">5+</div>
+                            <div class="stat-label">Projects</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">Climate</div>
+                            <div class="stat-label">Studio</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">EUI</div>
+                            <div class="stat-label">Focus</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-tags">
+                        <span class="tag">Energy Simulation</span>
+                        <span class="tag">Passive Design</span>
+                        <span class="tag">Thermal Analysis</span>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="openModal('shading')">
+                    <div class="project-header">
+                        <span class="project-number">05</span>
+                        <span class="project-year">2025</span>
+                    </div>
+                    <h3 class="project-title">Shaping Daylight Workshop</h3>
+                    <p class="project-meta">Academic Workshop · Climate Studio & Parametric Design</p>
+                    <p class="project-description">
+                        Intensive daylighting workshop exploring spatial quality through annual daylight metrics, 
+                        glare analysis, and view studies. Parametric iteration of shading strategies for optimal performance.
+                    </p>
+                    
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">sDA</div>
+                            <div class="stat-label">Metric</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">ASE</div>
+                            <div class="stat-label">Analysis</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">DGP</div>
+                            <div class="stat-label">Glare</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-tags">
+                        <span class="tag">Daylighting</span>
+                        <span class="tag">Climate Studio</span>
+                        <span class="tag">Glare Analysis</span>
+                        <span class="tag">View Studies</span>
+                    </div>
+                </div>
+
+                <div class="project-card" onclick="openModal('gis')">
+                    <div class="project-header">
+                        <span class="project-number">06</span>
+                        <span class="project-year">2025</span>
+                    </div>
+                    <h3 class="project-title">Environmental Justice Analysis</h3>
+                    <p class="project-meta">Louisiana Cancer Alley · GIS Spatial Analysis</p>
+                    <p class="project-description">
+                        Spatial analysis examining relationships between industrial facilities and community demographics 
+                        using kernel density analysis, buffer zones, and demographic correlation studies.
+                    </p>
+                    
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">Kernel</div>
+                            <div class="stat-label">Density</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">GIS</div>
+                            <div class="stat-label">Analysis</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">ModelBuilder</div>
+                            <div class="stat-label">Workflow</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-tags">
+                        <span class="tag">GIS</span>
+                        <span class="tag">Spatial Analysis</span>
+                        <span class="tag">Data Visualization</span>
+                        <span class="tag">Environmental Justice</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <p>
+                Interested in building performance, computational design, or sustainable architecture? 
+                I'd love to discuss how data-driven design can create better buildings.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:ananyashrimali@cmu.edu" class="contact-btn">Email</a>
+                <a href="https://www.linkedin.com/in/ananyashrimali" class="contact-btn">LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 Ananya Shrimali</p>
+    </footer>
+
+    <!-- Modals -->
+    <div id="ashraeModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('ashrae')">&times;</button>
+            <h2 class="modal-title">ASHRAE Design Competition: São Paulo Public Library</h2>
+            
+            <div class="modal-section">
+                <h3>Overview</h3>
+                <p>
+                    Comprehensive HVAC system design for a three-story public library in São Paulo, Brazil (Climate Zone 2A). 
+                    Designed innovative hybrid system integrating VRF-DOAS with renewable energy to achieve significant energy savings 
+                    while maintaining optimal conditions for book preservation and occupant comfort.
+                </p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Performance Achievements</h3>
+                <ul>
+                    <li>45% energy reduction compared to baseline system (284 to 157 kWh/m²)</li>
+                    <li>397,800 kWh/year solar energy generation from 250 kW roof PV system (232 panels)</li>
+                    <li>Operational carbon reduced to 101 kgCO₂/m² (from 184 kgCO₂/m² baseline)</li>
+                    <li>Energy cost reduced to $29/m² annually</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>System Design</h3>
+                <ul>
+                    <li>Primary System: VRF (Variable Refrigerant Flow) with DOAS (Dedicated Outdoor Air System)</li>
+                    <li>Dehumidification: Desiccant dehumidifiers for humid climate control</li>
+                    <li>Ventilation: Energy Recovery Ventilators (ERV) for optimal indoor air quality</li>
+                    <li>Renewable Energy: 250 kW rooftop photovoltaic system</li>
+                    <li>Distribution: Overhead diffusers and linear grilles for targeted airflow</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Facade & Envelope Optimization</h3>
+                <ul>
+                    <li>Low-SHGC glass (U-value: 1.22 W/m²·K, SHGC: 0.28) for solar heat gain control</li>
+                    <li>Double-skin facade systems with ventilated buffer zones</li>
+                    <li>Dynamic shading devices (louvers and brise-soleil)</li>
+                    <li>Green roof for heat island effect reduction</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Zoning Strategy</h3>
+                <ul>
+                    <li>Tailored thermal zoning for diverse library spaces (reading, storage, archives, offices)</li>
+                    <li>Occupancy-based controls with sensors for energy optimization</li>
+                    <li>24/7 climate control for special collections (60°F DB, 30% RH minimum)</li>
+                    <li>Flexible system supporting future space modifications</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Tools & Standards</h3>
+                <p><strong>Climate Studio, Energy Modeling, ASHRAE Standards 62.1, 90.1, 55, Load Calculations, PVWatts Calculator</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="hvacModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('hvac')">&times;</button>
+            <h2 class="modal-title">Small Office HVAC System Selection & Energy Analysis</h2>
+            
+            <div class="modal-section">
+                <h3>Overview</h3>
+                <p>
+                    Comprehensive HVAC system analysis for a small coworking office in San Francisco, CA. 
+                    Evaluated multiple system types and recommended ductless mini-split VRF system achieving 
+                    significant energy savings while meeting occupant comfort requirements.
+                </p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Key Results</h3>
+                <ul>
+                    <li>33% energy savings with VRF system implementation</li>
+                    <li>Site EUI reduced to 54 kBTU/ft² (from 81 kBTU/ft² baseline)</li>
+                    <li>Peak cooling load: 79.7 kBTU/hr</li>
+                    <li>Peak heating load: 61.3 kBTU/hr</li>
+                    <li>Total fresh air requirement: 770.52 CFM</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>System Comparison & Selection</h3>
+                <p>Evaluated four HVAC system types for small office application:</p>
+                <ul>
+                    <li>Ductless Mini-Split VRF (Selected): High efficiency, flexible zoning, minimal space requirements</li>
+                    <li>VAV System: Good efficiency but higher installation costs and space requirements</li>
+                    <li>Geothermal Heat Pump: Highest efficiency but prohibitive initial cost</li>
+                    <li>WSHP: Efficient but requires significant mechanical space</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Design Calculations</h3>
+                <ul>
+                    <li>Zone-by-zone thermal load analysis (5 thermal zones)</li>
+                    <li>Fresh air requirements per ASHRAE 62.1</li>
+                    <li>Peak outdoor air heating load: 10,842 BTU/hr</li>
+                    <li>Peak outdoor air cooling load: 5,073 BTU/hr</li>
+                    <li>ERV sizing using RenewAire CORES calculator (HE 10IN unit selected)</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Selected Equipment</h3>
+                <ul>
+                    <li>VRF System: Mitsubishi Electric PUMY-P60 (20,000 BTU/h cooling, 24,000 BTU/h heating)</li>
+                    <li>Performance: SEER 18, HSPF 8.2</li>
+                    <li>Configuration: Supports 5 indoor units for multi-zone control</li>
+                    <li>ERV: RenewAire HE 10IN (250-1100 CFM capacity)</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Additional Strategies</h3>
+                <ul>
+                    <li>External shading devices for solar heat gain control (increased savings to 66%)</li>
+                    <li>Building envelope improvements reducing infiltration</li>
+                    <li>LED lighting upgrades for 73% lighting energy reduction</li>
+                    <li>Smart controls and occupancy sensors</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Tools & Standards</h3>
+                <p><strong>Climate Studio, ASHRAE Standards 62.1 & 90.1, Load Calculations, RenewAire CORES, Energy Modeling</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="thesisModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('thesis')">&times;</button>
+            <h2 class="modal-title">Adaptive Reuse: Office-to-Residential Conversions</h2>
+            
+            <div class="modal-section">
+                <h3>Overview</h3>
+                <p>
+                    Thesis research focusing on adaptive reuse of Pittsburgh office buildings from the 1965-1985 era, 
+                    analyzing their potential for residential conversion with emphasis on daylighting performance 
+                    and spatial quality.
+                </p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Research Focus</h3>
+                <ul>
+                    <li>Multiple parametric building iterations using RhinoPython</li>
+                    <li>Comprehensive daylighting analysis using Climate Studio</li>
+                    <li>Focus on 1965-1985 office building typologies in Pittsburgh</li>
+                    <li>Evaluation of spatial daylight autonomy (sDA) metrics</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Methodology</h3>
+                <ul>
+                    <li>Parametric model generation for exploring design alternatives</li>
+                    <li>Daylighting performance simulation and optimization</li>
+                    <li>Building systems analysis for residential conversion feasibility</li>
+                    <li>Integration of computational design with building performance metrics</li>
+                    <li>Automated workflows for rapid iteration and analysis</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Key Challenges</h3>
+                <ul>
+                    <li>Deep floor plates limiting natural light penetration</li>
+                    <li>Structural grid constraints on unit layouts</li>
+                    <li>Building systems adaptation for residential requirements</li>
+                    <li>Balancing unit count with daylighting quality</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Tools & Technologies</h3>
+                <p><strong>Rhino, Grasshopper, RhinoPython, Climate Studio, Spatial Daylight Autonomy Analysis</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="bpmModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('bpm')">&times;</button>
+            <h2 class="modal-title">Building Performance Modeling Projects</h2>
+            
+            <div class="modal-section">
+                <h3>Overview</h3>
+                <p>
+                    Collection of building performance analysis projects exploring energy modeling, 
+                    passive design strategies, and HVAC system optimization across various building 
+                    typologies and climate zones.
+                </p>
+            </div>
+
+            <div class="modal-section">
+                <h3>Key Projects</h3>
+                <ul>
+                    <li>Thermal comfort analysis for mixed-use development</li>
+                    <li>Passive cooling strategies for educational facilities</li>
+                    <li>Energy benchmarking and retrofit recommendations</li>
+                    <li>Daylighting optimization for office spaces</li>
+                    <li>Envelope performance analysis and improvements</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Methodologies</h3>
+                <ul>
+                    <li>Annual energy simulation using Climate Studio</li>
+                    <li>Peak load calculations and HVAC system sizing</li>
+                    <li>Parametric analysis of design variables</li>
+                    <li>Comparative performance studies</li>
+                    <li>Cost-benefit analysis of energy strategies</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Skills Developed</h3>
+                <ul>
+                    <li>Energy modeling and simulation workflows</li>
+                    <li>Building systems integration</li>
+                    <li>Performance metric interpretation</li>
+                    <li>Data visualization and communication</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Tools</h3>
+                <p><strong>Climate Studio, Rhino, Grasshopper, Energy Modeling, Load Calculations</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="shadingModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('shading')">&times;</button>
+            <h2 class="modal-title">Shaping Daylight Workshop</h2>
+            
+            <div class="modal-section">
+                <h3>Overview</h3>
+                <p>
+                    Intensive workshop focused on understanding and optimizing daylight performance in buildings. 
+                    Explored the relationship between spatial quality, occupant comfort, and quantitative daylight metrics 
+                    through parametric iteration and simulation-based analysis.
+                </p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Key Metrics Analyzed</h3>
+                <ul>
+                    <li>Spatial Daylight Autonomy (sDA): Percentage of space meeting daylight thresholds</li>
+                    <li>Annual Sunlight Exposure (ASE): Hours of direct sunlight penetration</li>
+                    <li>Daylight Glare Probability (DGP): Occupant visual comfort assessment</li>
+                    <li>View Quality: Quantitative analysis of outside visibility</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Design Exploration</h3>
+                <ul>
+                    <li>Parametric shading device design for optimal solar control</li>
+                    <li>Window-to-wall ratio optimization studies</li>
+                    <li>Glazing specification analysis (VLT, SHGC trade-offs)</li>
+                    <li>Orientation studies for various climates</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Tools</h3>
+                <p><strong>Climate Studio, Rhino, Grasshopper, Radiance, Annual Daylight Metrics (sDA, ASE, DGP)</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="gisModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('gis')">&times;</button>
+            <h2 class="modal-title">Environmental Justice Analysis: Louisiana Cancer Alley</h2>
+            
+            <div class="modal-section">
+                <h3>Overview</h3>
+                <p>
+                    Comprehensive GIS analysis examining spatial relationships between industrial facilities 
+                    and community demographics in Louisiana's "Cancer Alley" region, investigating environmental 
+                    justice implications through multi-layered spatial analysis.
+                </p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Research Questions</h3>
+                <ul>
+                    <li>What is the spatial distribution of industrial facilities along the Mississippi River?</li>
+                    <li>How do facility concentrations correlate with community demographics?</li>
+                    <li>Which communities are most exposed to industrial proximity?</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Methodology</h3>
+                <ul>
+                    <li>Kernel Density Analysis: Identified industrial facility clustering patterns</li>
+                    <li>Buffer Zone Analysis: Calculated population within proximity thresholds</li>
+                    <li>Demographic Correlation: Analyzed race, income, and health data relationships</li>
+                    <li>Temporal Analysis: Tracked facility growth over decades</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Technical Approach</h3>
+                <ul>
+                    <li>ModelBuilder for automated, reproducible analysis workflows</li>
+                    <li>Python scripting for batch processing and data management</li>
+                    <li>Spatial statistics for correlation analysis</li>
+                    <li>Professional cartographic design for clear communication</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>Tools</h3>
+                <p><strong>ArcGIS Pro, ModelBuilder, Python (ArcPy), Spatial Statistics, Kernel Density Analysis, Cartographic Design</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(project) {
+            const modal = document.getElementById(project + 'Modal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(project) {
+            const modal = document.getElementById(project + 'Modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
